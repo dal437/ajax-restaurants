@@ -37,4 +37,29 @@
 		});
 	}
 
+	const fetch_places = (querys = {}) => {
+		const req = new XMLHttpRequest();
+		req.addEventListener('load', () => {
+			if (req.status >= 200 && req.status < 400) {
+				const places = JSON.parse(req.responseText);
+				render_list(places, true);
+			}
+		});
+		const formatted_querys = Object.keys(querys).map(k => querys[k] ? `${k}=${encodeURIComponent(querys[k])}` : '').join('&');
+		req.open('GET', `${BASE_URL}/places?${formatted_querys}`, true);
+		req.send(null);
+	};
+
+	const post_new_place = (data, cb) => {
+		const req = new XMLHttpRequest();
+		req.addEventListener('load', () => {
+			if (req.status >= 200 && req.status < 400) {
+				if (cb) cb();
+			}
+		});
+		req.open('POST', `${BASE_URL}/places/create`, true);
+		req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+		req.send(JSON.stringify(data));
+	}
+
 	
