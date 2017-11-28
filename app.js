@@ -5,11 +5,18 @@ require('./db');
 const portNum = 3000;
 
 const express = require('express');
-const app = express();
+var bodyParser = require('body-parser');
+
+var app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // load routes from routes folder
 // TODO: add API routes to ./routes/places.js!!!
-app.use(express.urlencoded({extended: false}));
 const placesRoutes = require('./routes/places');
 app.use('/api', placesRoutes);
 
