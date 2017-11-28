@@ -9,13 +9,13 @@ const app = express();
 
 // load routes from routes folder
 // TODO: add API routes to ./routes/places.js!!!
+app.use(express.urlencoded({extended: false}));
 const placesRoutes = require('./routes/places');
 app.use('/api', placesRoutes);
 
 // enable static final serving from public folder
 const path = require('path');
 app.use(express.static(path.resolve(__dirname, 'public')));
-app.use(express.urlencoded({extended: false}));
 
 app.set('view engine', 'hbs');
 

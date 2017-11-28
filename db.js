@@ -11,4 +11,3 @@ const placeSchema = mongoose.Schema({
 mongoose.model('Place', placeSchema);
 
 mongoose.connect('mongodb://localhost/hw08', {useMongoClient: true});
-
