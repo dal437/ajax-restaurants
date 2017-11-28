@@ -62,4 +62,28 @@
 		req.send(JSON.stringify(data));
 	}
 
-	
+	const render_list = (places = [], append = true) => {
+		// delete all textContentnt if append false
+		if (append) {
+			$places_list.innerHTML = '';
+		}
+		places.forEach(p => {
+			const tr = document.createElement('tr');
+			['name', 'cuisine', 'location'].map(x => {
+				const td = document.createElement('td');
+				td.textContent = p[x];
+				return td;
+			}).forEach(td => tr.appendChild(td));
+			$places_list.appendChild(tr);
+		});
+	}
+
+	const erase_inputs = () => {
+		$input_name.value = '';
+		$input_location.value = '';
+		$input_cuisine.value = 'Chinese';
+	}
+
+	fetch_places();
+	setup_listeners();
+})();

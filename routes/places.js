@@ -23,14 +23,19 @@ router.get('/places', (req, res) => {
 	}
 
 	Place.find(q, (err, places, count) => {
-		res.json(places.map(p => (
-			{
-				name: p.name,
-				cuisine: p.cuisine,
-				location: p.location,
-			}
-		)))
-	});
+    if (err) {
+      res.send({'error': 'This is an error'})
+    }
+    else {
+      res.json(places.map(p => (
+        {
+          name: p.name,
+          cuisine: p.cuisine,
+          location: p.location,
+        }
+      )))
+    }
+  });
 });
 
 router.post('/places/create', (req, res) => {

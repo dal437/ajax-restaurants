@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 
 //using mongoose models
 const placeSchema = mongoose.Schema({
-  name: String,
+  name: {type: String, required:true},
   cuisine: String,
   location: String
 });
